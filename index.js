@@ -1,6 +1,7 @@
 Web3 = require('web3');
 Util = require('ethereumjs-util');
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+IPFS = require('ipfs');
 
 // Public key from the first ethereum account
 // Sign a message and then we can get back the public key back
@@ -19,6 +20,21 @@ async function getPublicKeyForFirstAccount() {
     return {pubKey, account};
 }
   
-(async() => {
-    console.log(await getPublicKeyForFirstAccount());
-})();
+async function main() {
+    // Create an IPFS node
+    const node = await IPFS.create();
+    
+    // Create a file on the fly which has some basic JSON
+    const filesAdded = await node.add({
+        path: 'something.json',
+        content: Buffer.from(JSON.stringify({msg:"this is a message"}))
+    });
+
+    console.log('Added file:', filesAdded[0].path, filesAdded[0].hash);
+
+    const fileBuffer = await node.cat(filesAdded[0].hash);
+
+    console.log('Added file contents:', fileBuffer.toString());
+}
+
+main()

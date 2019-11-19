@@ -28,11 +28,11 @@ async function main() {
     // Basic payload with JSON
     const payload = {msg:"this is a message"};
     const ethIdentity = await getPublicKeyForFirstAccount();
-    const alice = EthCrypto.createIdentity();
+    // const alice = EthCrypto.createIdentity();
     let pubKey = ethIdentity.pubKey.substr(2);
-    pubKey = alice.publicKey;
+    // pubKey = alice.publicKey;
 
-    console.log(alice.privateKey.length);
+    // console.log(alice.privateKey.length);
     console.log(privateKey.length);
 
     const encrypted = await EthCrypto.encryptWithPublicKey(

@@ -4,7 +4,7 @@ web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 // Public key from the first ethereum account
 // Sign a message and then we can get back the public key back
-
+// Returns account and its public key
 async function getPublicKeyForFirstAccount() {
     let hashedMsg = web3.utils.sha3('test');
     let accounts = await web3.eth.getAccounts();
